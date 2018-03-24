@@ -205,7 +205,7 @@ namespace CourseWork
                     List<InstalledMeter> list = MakeIntersection<InstalledMeter>();
 
                     using (var db = new ModelContainer1())
-                    dgList.ItemsSource = (from m in list select new { Заводской_Номер = m.ProductionId, Пользователь = (from met in db.MeterSet where met.ProductionId == m.ProductionId select met).AsParallel().First().User.FullName, Название = m.Name, Описание = m.Discription, Сумма_Показаний = m.SumReadings, Вместимость = m.Capacity, Дата_производства = m.ProductionDate.ToString("d"), Дата_Установки = m.InstallDate, Дата_Следующей_Проверки = m.ExpirationDate }).AsParallel();
+                    dgList.ItemsSource = (from m in list select new { Заводской_Номер = m.ProductionId, Пользователь = (from met in db.MeterSet where met.ProductionId == m.ProductionId select met).AsParallel().First().User.FullName, Название = m.Name, Описание = m.Discription, Сумма_Показаний = m.SumReadings, Вместимость = m.Capacity, Дата_производства = m.ProductionDate.ToString("d"), Дата_Установки = m.InstallDate.ToString("d"), Дата_Следующей_Проверки = m.ExpirationDate.ToString("d") }).AsParallel();
                 }
                     break;
                 case "Пользователь":
