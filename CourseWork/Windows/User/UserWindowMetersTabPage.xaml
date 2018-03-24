@@ -1,0 +1,16 @@
+﻿<Page x:Class="CourseWork.UserWindowMetersTabPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CourseWork"
+      mc:Ignorable="d" 
+      d:DesignHeight="290" d:DesignWidth="300"
+      Title="UserWindowMetersTabPage">
+
+    <StackPanel Width="300" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <TextBlock Text="Установленные счётчики" Margin="0 10 0 10"  Height="20" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <ListBox Name="lbMeters" Height="200" Width="250" Margin="0 0 0 10" SelectionMode="Single" Background="LightGray" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <Button Content="Обновить" Margin="10 0 10 0" Click="RefreshMeterTable_OnClick"/>
+    </StackPanel>
+</Page>

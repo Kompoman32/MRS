@@ -1,0 +1,35 @@
+﻿<Window x:Class="CourseWork.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CourseWork"
+        mc:Ignorable="d"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Title="MRS: Вход" Height="340" Width="250">
+<TabControl>
+    <TabItem Header="Вход">
+        <StackPanel Width="200" VerticalAlignment="Center"> 
+            <TextBlock Text="Введите логин и пароль" TextWrapping="Wrap" Width="135" Height="20"/>
+            <TextBlock Text="Login:" Height="20" Margin="5"/>
+            <TextBox Name="tbLoginL"  Margin="5" MaxLength="32"/>
+            <TextBlock Text="Password:" Height="20" Margin="5"/>
+            <PasswordBox Name="pbPasswordL"  Margin="5" PasswordChar="◙" MaxLength="32"/>
+            <Button Content="Войти" Margin="5 20" Click="SignInButton_Click" IsDefault="True"/>
+        </StackPanel>
+    </TabItem>
+    <TabItem Header="Регистрация">
+        <StackPanel Margin="20">
+            <TextBlock Text="Введите ФИО, логин и пароль" TextWrapping="Wrap" Width="170" Height="20" />
+            <TextBlock Text="ФИО:" Height="20" Margin="5"/>
+            <TextBox Name="tbFullNameR"  Margin="5" Text="" MaxLength="32"/>
+            <TextBlock Text="Логин:" Height="20" Margin="5"/>
+            <TextBox Name="tbLoginR"  Margin="5" Text="" MaxLength="32"/>
+            <TextBlock Text="Пароль:" Height="20" Margin="5"/>
+                <TextBox Name="tbPasswordR"  Margin="5" Text="" MaxLength="32"/>
+            <Button Content="Зарегестрировать" Margin="5 20" Click="SignUpButton_Click" IsDefault="True"/>
+        </StackPanel>
+    </TabItem>
+    </TabControl>
+</Window>

@@ -1,0 +1,39 @@
+﻿<Window x:Class="CourseWork.ChooseTariff"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CourseWork"
+        mc:Ignorable="d"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterOwner"
+        Title="Выбор тарифа и ввод показателей" Height="260" Width="350">
+    <Grid Margin="10">
+        <TextBlock Text="Максимальная разрядность:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Name="tblCapacity" Text="9" Margin="0 0 10 0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        
+        <TextBlock Text="Количество знаков до запятой:" Margin="0 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <WrapPanel ItemHeight="20" Width="100" Margin="0 20 10 0" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <TextBox Name="tbBefComma"  Text="1"  Height="20" Width="60" IsEnabled="False"/>
+            <Button Content="Ʌ" FontSize="13" Width="20" Click="bBefComNumUp_OnClick" TabIndex="1"/>
+            <Button Content="V" FontSize="13" Width="20" Click="bBefComNumDown_OnClick" TabIndex="2"/>
+        </WrapPanel>
+
+        <TextBlock Text="Количество знаков после запятой: " Margin="0 40 0 0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <WrapPanel ItemHeight="20" Width="100" Margin="0 40 10 0" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <TextBox Name="tbAftComma" Text="0" Height="20" Width="60" IsEnabled="False"/>
+            <Button Content="Ʌ" FontSize="13" Width="20" Click="bAftComNumUp_OnClick"/>
+            <Button Content="V" FontSize="13" Width="20" Click="bAftComNumDown_OnClick"/>
+        </WrapPanel>
+
+        <TextBlock Text="Тариф:" Margin="0 70 0 0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <ComboBox Name="cbTariff" Height="25" Width="160" Margin="50 70 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="cbTariff_OnSelectionChanged" TabIndex="3"/>
+        <Button Content="Сохранить" IsDefault="True" TabIndex="5" Height="25" Width="70" Margin="0 70 10 0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Save_OnClick"/>
+        
+        <TextBlock Text="Числа будут округлены по количеству знаков после запятой!" FontSize="9" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 90"/>
+
+        <ScrollViewer Height="80" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto">
+            <WrapPanel Name="wpReadings"/>
+        </ScrollViewer>
+    </Grid>
+</Window>

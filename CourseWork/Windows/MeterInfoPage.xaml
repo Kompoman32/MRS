@@ -1,0 +1,64 @@
+﻿<Page x:Class="CourseWork.MeterInfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CourseWork"
+      mc:Ignorable="d" 
+      d:DesignHeight="540" d:DesignWidth="720"
+      Title="MeterInfoPage" FontSize="14">
+
+    <Grid>
+        <WrapPanel Background="White" >
+            <TextBlock Text="Информация о счётчике" FontSize="20" TextAlignment="Center" Width="720"/>
+
+            <TextBlock Text="Название: " Width="175" TextAlignment="Right"/>
+            <TextBlock Name="tblName" Width="175" Foreground="Blue" TextAlignment="Center"/>
+
+            <Rectangle Width="700"  Height="15"/>
+
+            <TextBlock Text="Заводской номер: " Width="175" TextAlignment="Right"/>
+            <TextBlock Name="tblProdID" Width="175" Foreground="Blue" TextAlignment="Center"/>
+
+            <TextBlock Text="Дата производства:" Width="175" TextAlignment="Right"/>
+            <TextBlock Name="tblProductionDate" Width="175" Foreground="Blue" TextAlignment="Center"/>
+
+            <TextBlock Text="Дата установки: " Width="175" TextAlignment="Right"/>
+            <TextBlock Name="tblInstallDate" Width="175" Foreground="Blue" TextAlignment="Center"/>
+
+            <TextBlock Text="Дата следующей проверки:" Width="175" TextAlignment="Right"/>
+            <TextBlock Name="tblExpiracyDate" Width="175" Foreground="Blue" TextAlignment="Center"/>
+
+            <Rectangle Width="700"  Height="15"/>
+
+            <TextBlock Text="Тип счётчика: " Width="175" TextAlignment="Right"/>
+            <TextBlock Name="tblType" Width="175" Foreground="Blue" TextAlignment="Center"/>
+
+            <TextBlock Text="Тариф: " Width="175" TextAlignment="Right"/>
+            <TextBlock Name="tblTariff" Width="175" Foreground="Blue" TextAlignment="Center"/>
+
+            <TextBlock Text="Общие показания: " Width="175" TextAlignment="Right"/>
+            <TextBlock Name="tblReadings" Width="175" Foreground="Blue" TextAlignment="Center"/>
+
+            <TextBlock Text="Вместимость: " Width="175" TextAlignment="Right"/>
+            <TextBlock Name="tblCapacity" Width="175" Foreground="Blue" TextAlignment="Center"/>
+
+            <WrapPanel Name="wpReading" Width="710"/>
+
+            <Rectangle Width="700"  Height="15"/>
+
+            <TextBlock Text="Параметры" Width="350" TextAlignment="Center"/>
+            <TextBlock Text="Документы" Width="350" TextAlignment="Center"/>
+            <ListView Name="lvParameters" Height="200" Width="320" Margin="10 0 10 0"/>
+            <ListView Name="lvDocuments" Height="200" Width="320" Margin="10 0 10 0"/>
+
+            <Rectangle Width="700"  Height="15"/>
+
+            <TextBlock Text="Описание" Width="700" TextAlignment="Center"/>
+            <TextBlock Name="tblDiscription" Width="700" Foreground="Blue" TextAlignment="Center"/>
+            <TextBlock Name="tblWarning" Foreground="DarkRed" FontSize="25" Width="670" TextAlignment="Center"/>
+
+            <Button Name="bListToExcel" Height="25" Width="25" HorizontalAlignment="Right" Click="bToExcel_Click"/>
+        </WrapPanel>
+    </Grid>
+</Page>

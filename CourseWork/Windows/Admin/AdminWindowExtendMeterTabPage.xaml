@@ -1,0 +1,29 @@
+﻿<Page x:Class="CourseWork.AdminWindowExtendMeterTabPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CourseWork"
+      mc:Ignorable="d" 
+      d:DesignHeight="640" d:DesignWidth="720"
+      Title="AdminWindowExtendMeterTabPage">
+
+    <StackPanel Margin="10">
+                    <Grid >
+                        <TextBlock Text="Пользователь:" Height="25" VerticalAlignment="Top"  HorizontalAlignment="Left"/>
+                        <ComboBox Name="cbUsers" Height="25" Width="250" Margin="100 0 0 0" VerticalAlignment="Top"  HorizontalAlignment="Left" SelectionChanged="cbUsers_OnSelectionChanged" />
+                        <TextBlock Text=" Счётчик" Height="25" Margin="360 0 0 0" VerticalAlignment="Top"  HorizontalAlignment="Left"/>
+                        <ComboBox Name="cbMeters" Height="25" Width="250" Margin="430 0 0 0" VerticalAlignment="Top"  HorizontalAlignment="Left" SelectionChanged="cbMeters_OnSelectionChanged" />
+                    </Grid>
+                    <Frame Name="frMeterInfo" NavigationUIVisibility="Hidden" Height="530" Margin="0 10 0 10" VerticalAlignment=" Top">
+                        <Frame.Content>
+                            <TextBlock Text="Выберите пользователя и счётчик" FontSize="40" TextAlignment="Center" VerticalAlignment="Center"/>
+                        </Frame.Content>
+                    </Frame>
+                    <WrapPanel>
+                        <TextBlock Text="Продлить до " FontSize="20" VerticalAlignment="Center"/>
+                        <DatePicker Name="dpExpiracyDate" FontSize="20" Margin="20 0 0 0"/>
+                        <Button Content="Продлить" Width="350" FontSize="20"  Margin="20 0 0 0" Click="bExtend_OnClick"/>
+                    </WrapPanel>
+                </StackPanel>
+</Page>

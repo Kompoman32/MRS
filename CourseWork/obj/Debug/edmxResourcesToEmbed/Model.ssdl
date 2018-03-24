@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="MeterSet" EntityType="Model.Store.MeterSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ParametrSet" EntityType="Model.Store.ParametrSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TypeSet" EntityType="Model.Store.TypeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserSet" EntityType="Model.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DocumentSet" EntityType="Model.Store.DocumentSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TariffSet" EntityType="Model.Store.TariffSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TimeSpanSet" EntityType="Model.Store.TimeSpanSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ReadingSet" EntityType="Model.Store.ReadingSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MeterSet_InstalledMeter" EntityType="Model.Store.MeterSet_InstalledMeter" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MeterParametr" EntityType="Model.Store.MeterParametr" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_MeterParametr_Meter" Association="Model.Store.FK_MeterParametr_Meter">
+      <End Role="Meter" EntitySet="MeterSet" />
+      <End Role="MeterParametr" EntitySet="MeterParametr" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MeterParametr_Parametr" Association="Model.Store.FK_MeterParametr_Parametr">
+      <End Role="Parametr" EntitySet="ParametrSet" />
+      <End Role="MeterParametr" EntitySet="MeterParametr" />
+    </AssociationSet>
+    <AssociationSet Name="MeterTariff" Association="Model.Store.MeterTariff">
+      <End Role="Meter" EntitySet="MeterSet" />
+      <End Role="Tariff" EntitySet="TariffSet" />
+    </AssociationSet>
+    <AssociationSet Name="TypeMeter" Association="Model.Store.TypeMeter">
+      <End Role="Type" EntitySet="TypeSet" />
+      <End Role="Meter" EntitySet="MeterSet" />
+    </AssociationSet>
+    <AssociationSet Name="MeterDocument" Association="Model.Store.MeterDocument">
+      <End Role="Meter" EntitySet="MeterSet" />
+      <End Role="Document" EntitySet="DocumentSet" />
+    </AssociationSet>
+    <AssociationSet Name="TariffTimeSpan" Association="Model.Store.TariffTimeSpan">
+      <End Role="Tariff" EntitySet="TariffSet" />
+      <End Role="TimeSpan" EntitySet="TimeSpanSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserMeter" Association="Model.Store.UserMeter">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Meter" EntitySet="MeterSet" />
+    </AssociationSet>
+    <AssociationSet Name="MeterReading" Association="Model.Store.MeterReading">
+      <End Role="Meter" EntitySet="MeterSet" />
+      <End Role="Reading" EntitySet="ReadingSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InstalledMeter_inherits_Meter" Association="Model.Store.FK_InstalledMeter_inherits_Meter">
+      <End Role="Meter" EntitySet="MeterSet" />
+      <End Role="InstalledMeter" EntitySet="MeterSet_InstalledMeter" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="MeterSet">
+    <Key>
+      <PropertyRef Name="ProductionId" />
+    </Key>
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Discription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SumReadings" Type="float" Nullable="false" />
+    <Property Name="Capacity" Type="float" Nullable="false" />
+    <Property Name="ProductionId" Type="bigint" Nullable="false" />
+    <Property Name="ProductionDate" Type="datetime" Nullable="false" />
+    <Property Name="Tariff_Id" Type="int" Nullable="false" />
+    <Property Name="Type_Id" Type="int" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ParametrSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Measure" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TypeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Unit" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AdminPrivileges" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Discription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SigningDate" Type="datetime" Nullable="false" />
+    <Property Name="Meter_ProductionId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TariffSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TimeSpanSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TimeStart" Type="time" Nullable="false" />
+    <Property Name="TimeEnd" Type="time" Nullable="false" />
+    <Property Name="Tariff_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReadingSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Value" Type="float" Nullable="false" />
+    <Property Name="TariffNumber" Type="int" Nullable="false" />
+    <Property Name="Meter_ProductionId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MeterSet_InstalledMeter">
+    <Key>
+      <PropertyRef Name="ProductionId" />
+    </Key>
+    <Property Name="InstallDate" Type="datetime" Nullable="false" />
+    <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+    <Property Name="ProductionId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MeterParametr">
+    <Key>
+      <PropertyRef Name="Meters_ProductionId" />
+      <PropertyRef Name="Parametrs_Id" />
+    </Key>
+    <Property Name="Meters_ProductionId" Type="bigint" Nullable="false" />
+    <Property Name="Parametrs_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="MeterTariff">
+    <End Role="Meter" Type="Model.Store.MeterSet" Multiplicity="*" />
+    <End Role="Tariff" Type="Model.Store.TariffSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Tariff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Meter">
+        <PropertyRef Name="Tariff_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TypeMeter">
+    <End Role="Type" Type="Model.Store.TypeSet" Multiplicity="1" />
+    <End Role="Meter" Type="Model.Store.MeterSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Meter">
+        <PropertyRef Name="Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MeterDocument">
+    <End Role="Meter" Type="Model.Store.MeterSet" Multiplicity="1" />
+    <End Role="Document" Type="Model.Store.DocumentSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meter">
+        <PropertyRef Name="ProductionId" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="Meter_ProductionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TariffTimeSpan">
+    <End Role="Tariff" Type="Model.Store.TariffSet" Multiplicity="1" />
+    <End Role="TimeSpan" Type="Model.Store.TimeSpanSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tariff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeSpan">
+        <PropertyRef Name="Tariff_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserMeter">
+    <End Role="User" Type="Model.Store.UserSet" Multiplicity="1" />
+    <End Role="Meter" Type="Model.Store.MeterSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Meter">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MeterReading">
+    <End Role="Meter" Type="Model.Store.MeterSet" Multiplicity="1" />
+    <End Role="Reading" Type="Model.Store.ReadingSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meter">
+        <PropertyRef Name="ProductionId" />
+      </Principal>
+      <Dependent Role="Reading">
+        <PropertyRef Name="Meter_ProductionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MeterParametr_Meter">
+    <End Role="Meter" Type="Model.Store.MeterSet" Multiplicity="1" />
+    <End Role="MeterParametr" Type="Model.Store.MeterParametr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meter">
+        <PropertyRef Name="ProductionId" />
+      </Principal>
+      <Dependent Role="MeterParametr">
+        <PropertyRef Name="Meters_ProductionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MeterParametr_Parametr">
+    <End Role="MeterParametr" Type="Model.Store.MeterParametr" Multiplicity="*" />
+    <End Role="Parametr" Type="Model.Store.ParametrSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Parametr">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MeterParametr">
+        <PropertyRef Name="Parametrs_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InstalledMeter_inherits_Meter">
+    <End Role="Meter" Type="Model.Store.MeterSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="InstalledMeter" Type="Model.Store.MeterSet_InstalledMeter" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Meter">
+        <PropertyRef Name="ProductionId" />
+      </Principal>
+      <Dependent Role="InstalledMeter">
+        <PropertyRef Name="ProductionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

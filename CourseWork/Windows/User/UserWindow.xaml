@@ -1,0 +1,22 @@
+﻿<Window x:Class="CourseWork.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CourseWork"
+        mc:Ignorable="d"
+        ResizeMode="CanMinimize"
+        Title="MRS: "
+        Height="Auto" Width="Auto">
+    <Grid>
+        <TabControl SelectionChanged="Selector_OnSelectionChanged">
+            <TabItem Header="Счётчики">
+                <Frame Name="frMeters" NavigationUIVisibility="Hidden"/>
+            </TabItem>
+            <TabItem Header="Добавить новый счётчик">
+                <Frame Name="frAddMeter" NavigationUIVisibility="Hidden"/>
+            </TabItem>
+        </TabControl>
+        <TextBlock Name="tblTime" Background="Transparent" Height="25" Text="SOMEBODY EAT YOUR TIME" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>

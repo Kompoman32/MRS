@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ModelContainer1">
+    <EntitySetMapping Name="MeterSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Meter)">
+        <MappingFragment StoreEntitySet="MeterSet">
+          <ScalarProperty Name="ProductionId" ColumnName="ProductionId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Discription" ColumnName="Discription" />
+          <ScalarProperty Name="SumReadings" ColumnName="SumReadings" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="ProductionDate" ColumnName="ProductionDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.InstalledMeter)">
+        <MappingFragment StoreEntitySet="MeterSet_InstalledMeter">
+          <ScalarProperty Name="ProductionId" ColumnName="ProductionId" />
+          <ScalarProperty Name="InstallDate" ColumnName="InstallDate" />
+          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ParametrSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Parametr)">
+        <MappingFragment StoreEntitySet="ParametrSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Measure" ColumnName="Measure" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Type)">
+        <MappingFragment StoreEntitySet="TypeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.User)">
+        <MappingFragment StoreEntitySet="UserSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="AdminPrivileges" ColumnName="AdminPrivileges" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Document)">
+        <MappingFragment StoreEntitySet="DocumentSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Discription" ColumnName="Discription" />
+          <ScalarProperty Name="SigningDate" ColumnName="SigningDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TariffSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Tariff)">
+        <MappingFragment StoreEntitySet="TariffSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimeSpanSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TimeSpan)">
+        <MappingFragment StoreEntitySet="TimeSpanSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
+          <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReadingSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Reading)">
+        <MappingFragment StoreEntitySet="ReadingSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="TariffNumber" ColumnName="TariffNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="MeterParametr" TypeName="Model.MeterParametr" StoreEntitySet="MeterParametr">
+      <EndProperty Name="Meter">
+        <ScalarProperty Name="ProductionId" ColumnName="Meters_ProductionId" />
+      </EndProperty>
+      <EndProperty Name="Parametr">
+        <ScalarProperty Name="Id" ColumnName="Parametrs_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MeterTariff" TypeName="Model.MeterTariff" StoreEntitySet="MeterSet">
+      <EndProperty Name="Tariff">
+        <ScalarProperty Name="Id" ColumnName="Tariff_Id" />
+      </EndProperty>
+      <EndProperty Name="Meter">
+        <ScalarProperty Name="ProductionId" ColumnName="ProductionId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TypeMeter" TypeName="Model.TypeMeter" StoreEntitySet="MeterSet">
+      <EndProperty Name="Type">
+        <ScalarProperty Name="Id" ColumnName="Type_Id" />
+      </EndProperty>
+      <EndProperty Name="Meter">
+        <ScalarProperty Name="ProductionId" ColumnName="ProductionId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MeterDocument" TypeName="Model.MeterDocument" StoreEntitySet="DocumentSet">
+      <EndProperty Name="Meter">
+        <ScalarProperty Name="ProductionId" ColumnName="Meter_ProductionId" />
+      </EndProperty>
+      <EndProperty Name="Document">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TariffTimeSpan" TypeName="Model.TariffTimeSpan" StoreEntitySet="TimeSpanSet">
+      <EndProperty Name="Tariff">
+        <ScalarProperty Name="Id" ColumnName="Tariff_Id" />
+      </EndProperty>
+      <EndProperty Name="TimeSpan">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserMeter" TypeName="Model.UserMeter" StoreEntitySet="MeterSet">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Meter">
+        <ScalarProperty Name="ProductionId" ColumnName="ProductionId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MeterReading" TypeName="Model.MeterReading" StoreEntitySet="ReadingSet">
+      <EndProperty Name="Meter">
+        <ScalarProperty Name="ProductionId" ColumnName="Meter_ProductionId" />
+      </EndProperty>
+      <EndProperty Name="Reading">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

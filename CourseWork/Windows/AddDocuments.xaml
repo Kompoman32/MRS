@@ -1,0 +1,35 @@
+﻿<Window x:Class="CourseWork.AddDocuments"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CourseWork"
+        mc:Ignorable="d"
+        ResizeMode="CanMinimize"
+        Closing="AddDocuments_OnClosing"
+        WindowStartupLocation="CenterOwner"
+        Title="Добавление документов" Height="330" Width="420">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Документы" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5"/>
+        <ListBox Name="lbDocuments" Background="LightGray" Margin="10 30 10 10" SelectionMode="Single"  SelectionChanged="lbDocuments_OnSelectionChanged">
+            <Button Name="bNewDoc" Content="Добавить новый" Margin="0 0 0 0" Height="25" Width="115" Click="bNewDoc_Click" />
+        </ListBox>
+        <StackPanel Grid.Column="1" Margin="0 10 10 10">
+            <TextBlock Text="Заголовок" Margin="0 0 0 5"/>
+            <TextBox Name="tbTitle" Height="35" Margin="0 0 0 5" TextWrapping="Wrap" AcceptsReturn="True" KeyDown="TexBox_OnKeyDown"/>
+            <TextBlock Text="Описание (содержание, кто подписал)" Margin="0 0 0 5"/>
+            <TextBox Name="tbDiscription" Height="130" Margin="0 0 0 5" TextWrapping="Wrap" AcceptsReturn="True" KeyDown="TexBox_OnKeyDown"/>
+            <WrapPanel>
+                <TextBlock Text="Дата подписания:" Margin="0 3 10 0"/>
+                <DatePicker Name="dpSignDate" SelectedDateChanged="dpSignDate_OnSelectedDateChanged"/>
+                <Button Name="bDelDoc" Content="Удалить документ" Margin="0 10 10 0" Click="bDelDoc_OnClick" IsEnabled="False" />
+                <Button Name="bSaveDoc" Content="Добавить документ" Margin="0 10 0 0" Click="bSaveDoc_OnClick" IsEnabled="False"/>
+            </WrapPanel>
+            
+        </StackPanel>
+    </Grid>
+</Window>
