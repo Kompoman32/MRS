@@ -196,7 +196,7 @@ namespace CourseWork
                     List<Meter> list = MakeIntersection<Meter>();
 
                     using(var db = new ModelContainer1())
-                    dgList.ItemsSource = (from m in list select new { Заводской_Номер = m.ProductionId, Пользователь = (from met in db.MeterSet where met.ProductionId == m.ProductionId select met).AsParallel().First().User.FullName, Название = m.Name, Описание = m.Discription, Сумма_Показаний = m.SumReadings, Вместимость = m.Capacity, Дата_производства = m.ProductionDate.ToString("d") });
+                    dgList.ItemsSource = (from m in list select new { Заводской_Номер = m.ProductionId, Пользователь = (from met in db.MeterSet where met.ProductionId == m.ProductionId select met).AsParallel().First().User.FullName, Название = m.Name, Описание = m.Discription, Сумма_Показаний = m.SumReadings, Вместимость = m.Capacity, Дата_производства = m.ProductionDate.ToString("d") }).AsParallel();
                         
                 }
                         break;
@@ -204,49 +204,64 @@ namespace CourseWork
                 {
                     List<InstalledMeter> list = MakeIntersection<InstalledMeter>();
 
-                    dgList.ItemsSource = (from m in list select new {Название = m.Name, Описание = m.Discription, Сумма_Показаний = m.SumReadings, Вместимость = m.Capacity, Заводской_Номер = m.ProductionId, Дата_производства = m.ProductionDate.ToString("d"), Дата_Установки = m.InstallDate, Дата_Следующей_Проверки = m.ExpirationDate });
+                    using (var db = new ModelContainer1())
+                    dgList.ItemsSource = (from m in list select new { Заводской_Номер = m.ProductionId, Пользователь = (from met in db.MeterSet where met.ProductionId == m.ProductionId select met).AsParallel().First().User.FullName, Название = m.Name, Описание = m.Discription, Сумма_Показаний = m.SumReadings, Вместимость = m.Capacity, Дата_производства = m.ProductionDate.ToString("d"), Дата_Установки = m.InstallDate, Дата_Следующей_Проверки = m.ExpirationDate }).AsParallel();
                 }
                     break;
                 case "Пользователь":
                 {
                     List<User> list = MakeIntersection<User>();
-                    dgList.ItemsSource = (from u in list select new {ID = u.Id, Логин = u.Login, Полное_Имя = u.FullName, Админ = u.AdminPrivileges });
+
+                    using (var db = new ModelContainer1())
+                    dgList.ItemsSource = (from u in list select new {ID = u.Id, Логин = u.Login, Полное_Имя = u.FullName, Админ = u.AdminPrivileges, Количество_Счётчиков = (from us in db.UserSet where us.Login==u.Login select us).AsParallel().First().Meters.Count }).AsParallel();
                 }
                     break;
                 case "Тип":
                 {
                     List<Type> list = MakeIntersection<Type>();
-                    dgList.ItemsSource = (from t in list select new { ID = t.Id, Название = t.Name, Еденица_Измерения = t.Unit });
+
+                    using (var db = new ModelContainer1())
+                    dgList.ItemsSource = (from t in list select new { ID = t.Id, Название = t.Name, Еденица_Измерения = t.Unit, Количество_счётчиков = (from ty in db.TypeSet where ty.Id == t.Id select ty).AsParallel().First().Meters.Count  }).AsParallel();
                 }
                     break;
                 case "Параметр":
                 {
                     List<Parametr> list = MakeIntersection<Parametr>();
-                    dgList.ItemsSource = (from p in list select new { ID = p.Id, Название = p.Name, Значение = p.Measure });
+
+                    using (var db = new ModelContainer1())
+                    dgList.ItemsSource = (from p in list select new { ID = p.Id, Название = p.Name, Значение = p.Measure, Количество_счётчиков = (from pa in db.ParametrSet where pa.Id == p.Id select pa).AsParallel().First().Meters.Count }).AsParallel();
                 }
                     break;
                 case "Тариф":
                 {
                     List<Tariff> list = MakeIntersection<Tariff>();
-                    dgList.ItemsSource = (from t in list select new { ID = t.Id, Название = t.Name });
+
+                    using (var db = new ModelContainer1())
+                    dgList.ItemsSource = (from t in list select new { ID = t.Id, Название = t.Name, Количество_счётчиков = (from ty in db.TariffSet where t.Id ==ty.Id select ty).AsParallel().First().Meters.Count }).AsParallel();
                 }
                     break;
                 case "Временной отрезок":
                 {
                     List<TimeSpan> list = MakeIntersection<TimeSpan>();
-                    dgList.ItemsSource = (from t in list select new { ID = t.Id, Название = t.Name, Начало_Периода = t.TimeStart, Окончание_Периода = t.TimeEnd });
+
+                    using (var db = new ModelContainer1())
+                    dgList.ItemsSource = (from t in list select new { ID = t.Id, Тариф = (from ty in db.TimeSpanSet where ty.Id == t.Id select ty).AsParallel().First().Tariff.Name, Название = t.Name, Начало_Периода = t.TimeStart, Окончание_Периода = t.TimeEnd }).AsParallel();
                 }
                     break;
                 case "Показатель":
                 {
                     List<Reading> list = MakeIntersection<Reading>();
-                    dgList.ItemsSource = (from r in list select new { ID = r.Id, Значение = r.Value, Номер_тарифа = r.TariffNumber });
+
+                    using (var db = new ModelContainer1())
+                    dgList.ItemsSource = (from r in list select new { Заводской_номер_счётчика = (from re in db.ReadingSet where re.Id == r.Id select re).AsParallel().First().Meter.ProductionId, Значение = r.Value, Номер_тарифа = r.TariffNumber }).AsParallel();
                 }
                     break;
                 case "Документ":
                 {
                     List<Document> list = MakeIntersection<Document>();
-                    dgList.ItemsSource = (from d in list select new { ID = d.Id, Заголовок = d.Title, Описание = d.Discription, Дата_Подписания = d.SigningDate.ToString("d") });
+
+                    using (var db = new ModelContainer1())
+                    dgList.ItemsSource = (from d in list select new { Заводской_номер_счётчика = (from de in db.ReadingSet where de.Id == d.Id select de).AsParallel().First().Meter.ProductionId, Заголовок = d.Title, Описание = d.Discription, Дата_Подписания = d.SigningDate.ToString("d") }).AsParallel();
                 }
                     break;
                 default:
