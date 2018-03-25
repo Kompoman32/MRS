@@ -46,6 +46,8 @@ namespace CourseWork
         {
             using (var db = new ModelContainer1())
             {
+                NewMeter = null;
+
                 // Типы
                 var req2 = from t in db.TypeSet select t;
 
