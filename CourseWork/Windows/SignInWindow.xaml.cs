@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 
 namespace CourseWork
@@ -18,33 +19,42 @@ namespace CourseWork
         //LOGIN
         void SignInButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var db = new ModelContainer1()) // создание подключения к БД
+            try
             {
-                // выборка всех пользователей с таким логином
-                var req = from u in db.UserSet where u.Login == tbLoginL.Text select u;
-                
-                User user = req.Any() ? req.First() : null;
-
-                if (user == null)
+                using (var db = new ModelContainer1()) // создание подключения к БД
                 {
-                    MessageBox.Show("Пользователь не найден!", "Ошибка ввода", MessageBoxButton.OK,
-                        MessageBoxImage.Error);
-                    return;
-                }
+                    // выборка всех пользователей с таким логином
+                    var req = from u in db.UserSet where u.Login == tbLoginL.Text select u;
 
-                if (user.Password != pbPasswordL.Password)
-                {
-                    MessageBox.Show("Введён неверный пароль!", "Ошибка ввода", MessageBoxButton.OK,
-                        MessageBoxImage.Error);
-                    return;
-                }
+                    User user = req.Any() ? req.First() : null;
 
-                // В зависимости от привилегий разный доступ
-                if (user.AdminPrivileges)
-                    ShowAdmin(user.Login);
-                else 
-                    ShowUser(user.Login);
-            }           
+                    if (user == null)
+                    {
+                        MessageBox.Show("Пользователь не найден!", "Ошибка ввода", MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                        return;
+                    }
+
+                    if (user.Password != pbPasswordL.Password)
+                    {
+                        MessageBox.Show("Введён неверный пароль!", "Ошибка ввода", MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                        return;
+                    }
+
+                    // В зависимости от привилегий разный доступ
+                    if (user.AdminPrivileges)
+                        ShowAdmin(user.Login);
+                    else
+                        ShowUser(user.Login);
+                }
+            }
+            catch (Exception exc)
+            {
+                Error.Show(
+                    "Возникла ошибка:\n\n" + exc +
+                    "\n\nОбратитесь к техническому администратору с этой ошибкой.", "Ошибка");
+            }
         }
 
         void ShowUser(string login)
@@ -84,21 +94,30 @@ namespace CourseWork
         
         void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!CheckFieldsR()) return;
-
-            using (var db = new ModelContainer1())
+            try
             {
-                db.UserSet.Add(new User()
+                if (!CheckFieldsR()) return;
+
+                using (var db = new ModelContainer1())
                 {
-                    AdminPrivileges = false,
-                    FullName = tbFullNameR.Text,
-                    Login = tbLoginR.Text,
-                    Password = tbPasswordR.Text
-                });
+                    db.UserSet.Add(new User()
+                    {
+                        AdminPrivileges = false,
+                        FullName = tbFullNameR.Text,
+                        Login = tbLoginR.Text,
+                        Password = tbPasswordR.Text
+                    });
 
-                db.SaveChanges();
+                    db.SaveChanges();
 
-                ShowUser(tbLoginR.Text);
+                    ShowUser(tbLoginR.Text);
+                }
+            }
+            catch (Exception exc)
+            {
+                Error.Show(
+                    "Возникла ошибка:\n\n" + exc +
+                    "\n\nОбратитесь к техническому администратору с этой ошибкой.", "Ошибка");
             }
         }
     }
